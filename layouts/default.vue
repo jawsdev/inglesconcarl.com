@@ -5,7 +5,6 @@
     <header
       class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
-      {{ currentLanguage }}
       <NuxtLink :to="`/${currentLanguage.toLowerCase()}/home`">
         <img class="h-12 lg:h-20" src="~@/assets/logo.svg" alt />
       </NuxtLink>
@@ -22,7 +21,7 @@
         >
           <NuxtLink
             class="text-white flex flex-row justify-center items-center"
-            :to="`/${changeLanugage}/${$route.params.slug}`"
+            :to="`/${changeLanugage}`"
             ><span class="hidden lg:block text-sm font-semibold">
               {{ prettyLanguage }}
             </span>
@@ -98,6 +97,11 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data() {
+    return {
+      currentRoute: this.$route.params.slug
+    }
+  },
   computed: {
     ...mapGetters({
       currentLanguage: 'getLanguage',
@@ -108,10 +112,18 @@ export default {
       return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
     },
     changeLanugage() {
-      return this.currentLanguage === 'es' ? 'en' : 'es'
+      return this.currentLanguage === 'es'
+        ? `en/${this.changeLanugageRoute.slug}`
+        : `es/${this.changeLanugageRoute.slug}`
     },
     prettyLanguage() {
       return this.currentLanguage === 'es' ? 'Español' : 'English'
+    },
+    changeLanugageRoute() {
+      // return this.pagesLang.find((page) => page.slug === 'es')
+      return this.currentLanguage === 'es'
+        ? this.pagesEn.find((page) => page.slug === 'home')
+        : this.pagesEs.find((page) => page.slug === 'inicio')
     }
   },
   methods: {}

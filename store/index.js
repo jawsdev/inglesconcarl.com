@@ -7,7 +7,13 @@ export const state = () => ({
 export const getters = {
   getLanguage: (state) => state.language,
   getPagesEn: (state) => state.pagesEn,
-  getPagesEs: (state) => state.pagesEs
+  getPagesEs: (state) => state.pagesEs,
+  getPageContent: (state) => (slug) => {
+    return state.pagesEs.find((page) => page.slug === slug)
+  }
+  // usersForMember: (state) => (member) => {
+  //   return state.users.data.filter(u => u.member_id === member.id)
+  // }
 }
 
 export const mutations = {
