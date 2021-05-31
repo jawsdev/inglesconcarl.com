@@ -6,7 +6,7 @@
       class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
       {{ currentLanguage }}
-      <NuxtLink to="/">
+      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
         <img class="h-12 lg:h-20" src="~@/assets/logo.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
@@ -37,7 +37,7 @@
                 :key="page.id"
                 class="hoverable hover:bg-gray-100 hover:text-primary"
               >
-                <router-link
+                <NuxtLink
                   class="
                     relative
                     block
@@ -50,12 +50,12 @@
                     hover:bg-gray-100
                     hover:text-primary
                   "
-                  to="exam-preparation"
+                  :to="`/${currentLanguage}/${page.slug}`"
                 >
                   {{ page.title }}
-                </router-link>
+                </NuxtLink>
                 <div
-                  v-if="page.heroTitle"
+                  v-if="page.enableHeroTitleHover"
                   class="p-6 mega-menu h-64 mb-16 sm:mb-0 bg-gray-100 z-50"
                 >
                   <div
@@ -101,7 +101,7 @@ export default {
       pagesEs: 'getPagesEs'
     }),
     pagesLang() {
-      return this.currentLanguage === 'Es' ? this.pagesEs : this.pagesEn
+      return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
     }
   },
   methods: {}

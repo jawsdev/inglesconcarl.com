@@ -3,11 +3,7 @@ export default async function ({ store, app }) {
   const { pages } = await app.$graphcms.request(
     gql`
       {
-        pages(
-          stage: PUBLISHED
-          locales: en
-          where: { NOT: { slug: "home-page" } }
-        ) {
+        pages(stage: PUBLISHED, locales: en, orderBy: navigationOrder_ASC) {
           heroSubtitle
           heroTitle
           id
@@ -21,6 +17,7 @@ export default async function ({ store, app }) {
             url
             width
           }
+          enableHeroTitleHover
         }
       }
     `

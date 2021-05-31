@@ -1,5 +1,5 @@
 export const state = () => ({
-  language: 'Es',
+  language: 'es',
   pagesEn: [],
   pagesEs: []
 })
@@ -11,12 +11,8 @@ export const getters = {
 }
 
 export const mutations = {
-  changeToEn(state) {
-    state.language = 'En'
-  },
-
-  changeToEs(state) {
-    state.language = 'Es'
+  SET_LANGUAGE(state, language) {
+    state.language = language
   },
 
   SET_PAGES_EN(state, pagesEn) {
@@ -29,9 +25,9 @@ export const mutations = {
 }
 
 export const actions = {
-  changeToEn: ({ commit }) => commit('changeToEn'),
-
-  changeToEs: ({ commit }) => commit('changeToEs'),
+  putLanguage({ commit }, language) {
+    commit('SET_LANGUAGE', language)
+  },
 
   putPagesEn({ commit }, pagesEn) {
     commit('SET_PAGES_EN', pagesEn)

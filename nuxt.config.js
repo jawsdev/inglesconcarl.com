@@ -82,12 +82,16 @@ export default {
   ],
 
   router: {
-    middleware: ['pages_english', 'pages_spanish']
+    middleware: ['language', 'pages_english', 'pages_spanish']
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+
+  generate: {
+    routes: ['/en/', '/es/']
+  }
 }
