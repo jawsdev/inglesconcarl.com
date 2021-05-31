@@ -11,7 +11,7 @@ export default async function ({ store, app }) {
           slug
           title
           main {
-            text
+            html
           }
           heroImage(locales: en) {
             url

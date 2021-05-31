@@ -39,10 +39,8 @@ export default {
 
   googleFonts: {
     families: {
-      Roboto: true,
-      'Josefin+Sans': true,
       Lato: [100, 300],
-      Play: {
+      Lora: {
         wght: [400, 700]
       }
     }
