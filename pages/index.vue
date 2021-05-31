@@ -57,7 +57,7 @@ export default {
       pagesEs: 'getPagesEs'
     }),
     pagesLang() {
-      return this.currentLanguage === 'Es' ? this.pagesEs : this.pagesEn
+      return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
     }
   },
   mounted() {

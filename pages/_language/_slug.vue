@@ -2,6 +2,7 @@
   <div>
     router param {{ $route.params.language }}
     <div>currentLanguage: {{ currentLanguage }}</div>
+    <div>currentSlug: {{ $route.params.slug }}</div>
   </div>
 </template>
 

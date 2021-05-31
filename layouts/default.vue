@@ -6,7 +6,7 @@
       class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
       {{ currentLanguage }}
-      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
+      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/home`">
         <img class="h-12 lg:h-20" src="~@/assets/logo.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
@@ -20,14 +20,18 @@
             lg:items-start
           "
         >
-          <button class="text-white flex flex-row justify-center items-center">
-            <span class="hidden lg:block text-sm font-semibold">English</span>
+          <NuxtLink
+            class="text-white flex flex-row justify-center items-center"
+            :to="`/${changeLanugage}/${$route.params.slug}`"
+            ><span class="hidden lg:block text-sm font-semibold">
+              {{ prettyLanguage }}
+            </span>
             <font-awesome-icon
               class="pl-2 pr-2 lg:pr-0"
               :icon="['fas', 'language']"
               size="3x"
             />
-          </button>
+          </NuxtLink>
         </div>
         <nav class="w-full bg-primary text-white hidden lg:block">
           <div class="container mx-auto flex justify-end">
@@ -102,6 +106,12 @@ export default {
     }),
     pagesLang() {
       return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
+    },
+    changeLanugage() {
+      return this.currentLanguage === 'es' ? 'en' : 'es'
+    },
+    prettyLanguage() {
+      return this.currentLanguage === 'es' ? 'Español' : 'English'
     }
   },
   methods: {}
