@@ -3,7 +3,11 @@ export default async function ({ store, app }) {
   const { pages } = await app.$graphcms.request(
     gql`
       {
-        pages(locales: en, stage: PUBLISHED) {
+        pages(
+          stage: PUBLISHED
+          locales: es
+          where: { NOT: { slug: "home-page" } }
+        ) {
           heroSubtitle
           heroTitle
           id
@@ -13,9 +17,14 @@ export default async function ({ store, app }) {
           main {
             text
           }
+          heroImage(locales: en) {
+            url
+            width
+          }
         }
       }
     `
   )
-  store.dispatch('putPages', pages)
+
+  store.dispatch('putPagesEs', pages)
 }
