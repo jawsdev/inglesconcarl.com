@@ -1,9 +1,26 @@
 <template>
-  <div></div>
+  <div>
+    <section class="w-full h-64 bg-primary-light"></section>
+    <section>
+      <article>
+        <pre>
+          {{ pages }}
+        </pre>
+      </article>
+    </section>
+  </div>
 </template>
 
 <script>
-export default {}
+// import { gql } from 'graphql-request'
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      pages: 'getPages'
+    })
+  }
+}
 </script>
 
 <style></style>

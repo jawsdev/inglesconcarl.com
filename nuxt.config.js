@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'inglesconcarl.com',
+    title: 'Inglés con Carl',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,7 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/graphcms.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,14 +30,60 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/device',
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/google-analytics',
+    '@nuxtjs/fontawesome'
   ],
+
+  googleFonts: {
+    families: {
+      Roboto: true,
+      'Josefin+Sans': true,
+      Lato: [100, 300],
+      Play: {
+        wght: [400, 700]
+      }
+    }
+  },
+
+  googleAnalytics: {
+    id: 'G-MLVTD6Y5W6'
+  },
+
+  fontawesome: {
+    icons: {
+      solid: [
+        'faEnvelope',
+        'faUserCircle',
+        'faBriefcase',
+        'faFlag',
+        'faUserGraduate',
+        'faLanguage',
+        'faBars',
+        'faTimes',
+        'faSpinner',
+        'faCheck',
+        'faCircle',
+        'faGlobe'
+      ],
+      // regular: [],
+      // light: [],
+      // duotone: [],
+      brands: ['faWhatsapp']
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios'
   ],
+
+  router: {
+    middleware: 'pages'
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
