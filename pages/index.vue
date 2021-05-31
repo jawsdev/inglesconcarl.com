@@ -60,9 +60,7 @@ export default {
       return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
     }
   },
-  mounted() {
-    console.log(this.$route.params.slug)
-  },
+  mounted() {},
   methods: {
     // cookieClickedAccept: function() {
     //   this.$ga.enable();

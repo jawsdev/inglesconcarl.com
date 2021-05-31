@@ -10,23 +10,21 @@ module.exports = {
         whatsapp: '#4FCE5D'
       },
       fontFamily: {
-        lora: ['Lora', 'serif']
+        lora: ['Lora', 'serif'],
+        'open-sans': ['Open Sans', 'sans serif']
       },
-      typography: (theme) => ({
+      typography: {
         DEFAULT: {
           css: {
-            h1: {
-              color: theme('colors.cyan.900')
-            },
-            h2: {
-              color: theme('colors.cyan.900')
-            },
             h3: {
-              color: theme('colors.cyan.900')
+              color: '#FE8242',
+              '&:hover': {
+                color: '#FE8242'
+              }
             }
           }
         }
-      })
+      }
     }
   },
   plugins: [require('@tailwindcss/typography')]

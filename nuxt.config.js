@@ -39,8 +39,10 @@ export default {
 
   googleFonts: {
     families: {
-      Lato: [100, 300],
       Lora: {
+        wght: [400, 700]
+      },
+      'Open Sans': {
         wght: [400, 700]
       }
     }

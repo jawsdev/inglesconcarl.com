@@ -31,7 +31,15 @@
     </section>
     <section>
       <article
-        class="w-full py-10 md:w-3/4 mx-auto prose prose-2xl"
+        class="
+          w-full
+          py-10
+          md:w-3/4
+          mx-auto
+          prose prose-sm
+          lg:prose-2xl
+          font-open-sans
+        "
         v-html="pageContent.main.html"
       ></article>
     </section>
@@ -55,9 +63,9 @@ export default {
     }),
     pageContent() {
       if (this.currentLanguage === 'es') {
-        return this.pagesEs.find((page) => page.slug === this.currentRoute)
+        return this.pagesEs.find((page) => page.slug === 'inicio')
       } else {
-        return this.pagesEn.find((page) => page.slug === this.currentRoute)
+        return this.pagesEn.find((page) => page.slug === 'home')
       }
     }
   }
