@@ -120,7 +120,6 @@ export default {
       return this.currentLanguage === 'es' ? 'Español' : 'English'
     },
     changeLanugageRoute() {
-      // return this.pagesLang.find((page) => page.slug === 'es')
       return this.currentLanguage === 'es'
         ? this.pagesEn.find((page) => page.slug === 'home')
         : this.pagesEs.find((page) => page.slug === 'inicio')
@@ -139,8 +138,6 @@ export default {
   width: 100%;
 }
 
-/* #hoverable Class Styles
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .hoverable {
   position: static;
 }
@@ -148,9 +145,6 @@ export default {
 .hoverable:hover .mega-menu {
   display: block;
 }
-
-/* #toggle Class Styles
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .toggle-input {
   display: none;
