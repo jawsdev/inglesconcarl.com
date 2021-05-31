@@ -5,6 +5,7 @@
     <header
       class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
+      {{ currentLanguage }}
       <NuxtLink to="/">
         <img class="h-12 lg:h-20" src="~@/assets/logo.svg" alt />
       </NuxtLink>
@@ -31,7 +32,11 @@
         <nav class="w-full bg-primary text-white hidden lg:block">
           <div class="container mx-auto flex justify-end">
             <ul class="flex">
-              <li class="hoverable hover:bg-gray-100 hover:text-primary">
+              <li
+                v-for="page in pagesLang"
+                :key="page.id"
+                class="hoverable hover:bg-gray-100 hover:text-primary"
+              >
                 <router-link
                   class="
                     relative
@@ -47,8 +52,12 @@
                   "
                   to="exam-preparation"
                 >
+                  {{ page.title }}
                 </router-link>
-                <div class="p-6 mega-menu h-64 mb-16 sm:mb-0 bg-gray-100 z-50">
+                <div
+                  v-if="page.heroTitle"
+                  class="p-6 mega-menu h-64 mb-16 sm:mb-0 bg-gray-100 z-50"
+                >
                   <div
                     class="
                       mx-auto
@@ -61,11 +70,10 @@
                   >
                     <div class="w-auto text-primary text-center">
                       <h2 class="font-bold text-4xl">
-                        Need help preparing for exams?
+                        {{ page.heroTitle }}
                       </h2>
-                      <p class="text-gray-600 text-xl">
-                        Professional one-to-one help to prepare you for the
-                        Cambridge Exams
+                      <p v-if="page.heroSubtitle" class="text-gray-600 text-xl">
+                        {{ page.heroSubtitle }}
                       </p>
                     </div>
                   </div>
@@ -84,7 +92,20 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters({
+      currentLanguage: 'getLanguage',
+      pagesEn: 'getPagesEn',
+      pagesEs: 'getPagesEs'
+    }),
+    pagesLang() {
+      return this.currentLanguage === 'Es' ? this.pagesEs : this.pagesEn
+    }
+  },
+  methods: {}
+}
 </script>
 
 <style>
