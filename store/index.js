@@ -1,28 +1,43 @@
 export const state = () => ({
-  language: 'es',
-  pages: []
+  language: 'Es',
+  pagesEn: [],
+  pagesEs: []
 })
 
 export const getters = {
-  getPages: (state) => state.pages
+  getLanguage: (state) => state.language,
+  getPagesEn: (state) => state.pagesEn,
+  getPagesEs: (state) => state.pagesEs
 }
 
 export const mutations = {
-  SET_PAGES(state, pages) {
-    state.pages = pages
-  }
+  changeToEn(state) {
+    state.language = 'En'
+  },
 
-  // SET_PAGES_SPANISH(state, pagesSpanish) {
-  //   state.pages.spanish = pagesSpanish
-  // }
+  changeToEs(state) {
+    state.language = 'Es'
+  },
+
+  SET_PAGES_EN(state, pagesEn) {
+    state.pagesEn = pagesEn
+  },
+
+  SET_PAGES_ES(state, pagesEs) {
+    state.pagesEs = pagesEs
+  }
 }
 
 export const actions = {
-  putPages({ commit }, pages) {
-    commit('SET_PAGES', pages)
-  }
+  changeToEn: ({ commit }) => commit('changeToEn'),
 
-  // putPagesSpanish({ commit }, pagesSpanish) {
-  //   commit('SET_PAGES_SPANISH', pagesSpanish)
-  // }
+  changeToEs: ({ commit }) => commit('changeToEs'),
+
+  putPagesEn({ commit }, pagesEn) {
+    commit('SET_PAGES_EN', pagesEn)
+  },
+
+  putPagesEs({ commit }, pagesEs) {
+    commit('SET_PAGES_ES', pagesEs)
+  }
 }
