@@ -18,6 +18,7 @@ export default async function ({ store, app }) {
             width
           }
           enableHeroTitleHover
+          displayInMenu
         }
       }
     `

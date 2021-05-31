@@ -3,10 +3,10 @@
     class="w-full h-screen bg-white flex flex-col justify-between items-center"
   >
     <header
-      class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
+      class="w-full h-20 lg:h-36 bg-primary flex justify-center items-center"
     >
-      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/home`">
-        <img class="h-12 lg:h-20" src="~@/assets/logo.svg" alt />
+      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
+        <img class="h-12 lg:h-16" src="~@/assets/logo.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
         <div
@@ -109,12 +109,12 @@ export default {
       pagesEs: 'getPagesEs'
     }),
     pagesLang() {
-      return this.currentLanguage === 'es' ? this.pagesEs : this.pagesEn
+      return this.currentLanguage === 'es'
+        ? this.pagesEs.filter((pages) => pages.displayInMenu === true)
+        : this.pagesEn.filter((pages) => pages.displayInMenu === true)
     },
     changeLanugage() {
-      return this.currentLanguage === 'es'
-        ? `en/${this.changeLanugageRoute.slug}`
-        : `es/${this.changeLanugageRoute.slug}`
+      return this.currentLanguage === 'es' ? `en/` : `es/`
     },
     prettyLanguage() {
       return this.currentLanguage === 'es' ? 'Español' : 'English'
