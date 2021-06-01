@@ -3,10 +3,10 @@
     class="w-full h-screen bg-white flex flex-col justify-between items-center"
   >
     <header
-      class="w-full h-20 lg:h-36 bg-primary flex justify-center items-center"
+      class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
       <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
-        <img class="h-12 lg:h-16" src="~@/assets/logo.svg" alt />
+        <img class="h-8 lg:h-16" src="~@/assets/logo.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
         <div
@@ -82,6 +82,47 @@
                   </div>
                 </div>
               </li>
+              <li
+                v-if="dev"
+                class="hoverable hover:bg-gray-100 hover:text-primary"
+              >
+                <NuxtLink
+                  class="
+                    relative
+                    block
+                    py-2
+                    px-4
+                    lg:p-6
+                    text-xs
+                    lg:text-base
+                    font-bold
+                    hover:bg-gray-100
+                    hover:text-primary
+                  "
+                  :to="`/${currentLanguage}/`"
+                >
+                  Dev link
+                </NuxtLink>
+              </li>
+              <li class="hoverable hover:bg-gray-100 hover:text-primary">
+                <NuxtLink
+                  class="
+                    relative
+                    block
+                    py-2
+                    px-4
+                    lg:p-6
+                    text-xs
+                    lg:text-base
+                    font-bold
+                    hover:bg-gray-100
+                    hover:text-primary
+                  "
+                  :to="`/${currentLanguage}/contact`"
+                >
+                  {{ contactText }}
+                </NuxtLink>
+              </li>
             </ul>
           </div>
         </nav>
@@ -99,7 +140,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      currentRoute: this.$route.params.slug
+      currentRoute: this.$route.params.slug,
+      dev: process.env.NODE_ENV !== 'production'
     }
   },
   computed: {
@@ -123,63 +165,60 @@ export default {
       return this.currentLanguage === 'es'
         ? this.pagesEn.find((page) => page.slug === 'home')
         : this.pagesEs.find((page) => page.slug === 'inicio')
+    },
+    contactText() {
+      return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
     }
   },
   methods: {}
 }
 </script>
 
-<style>
-.mega-menu {
-  display: none;
-  left: 0;
-  position: absolute;
-  text-align: left;
-  width: 100%;
-}
+<style lang="sass">
+h1, h2, h3, h4, h5
+  @apply font-lora
 
-.hoverable {
-  position: static;
-}
+.mega-menu
+  display: none
+  left: 0
+  position: absolute
+  text-align: left
+  width: 100%
 
-.hoverable:hover .mega-menu {
-  display: block;
-}
+.hoverable
+  position: static
 
-.toggle-input {
-  display: none;
-}
-.toggle-input:not(checked) ~ .mega-menu {
-  display: none;
-}
+.hoverable:hover .mega-menu
+  display: block
 
-.toggle-input:checked ~ .mega-menu {
-  display: block;
-}
+.toggle-input
+  display: none
 
-.toggle-input:checked + label {
-  color: white;
-  background: #2c5282;
-  @apply bg-blue-800;
-}
+.toggle-input:not(checked) ~ .mega-menu
+  display: none
 
-.toggle-input:checked ~ label:after {
-  content: '\25B2';
-  font-size: 10px;
-  padding-left: 6px;
-  position: relative;
-  top: -1px;
-}
+.toggle-input:checked ~ .mega-menu
+  display: block
+
+.toggle-input:checked + label
+  color: white
+  background: #2c5282
+  @apply bg-blue-800
+
+.toggle-input:checked ~ label:after
+  content: '\25B2'
+  font-size: 10px
+  padding-left: 6px
+  position: relative
+  top: -1px
 
 .fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.3s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
+.fade-leave-active
+  transition-duration: 0.3s
+  transition-property: opacity
+  transition-timing-function: ease
 
 .fade-enter,
-.fade-leave-active {
-  opacity: 0;
-}
+.fade-leave-active
+  opacity: 0
 </style>

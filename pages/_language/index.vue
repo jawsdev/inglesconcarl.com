@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="pageContent">
     <!-- <pre>{{ pageContent }}</pre> -->
     <section
       :style="`background-image: url(${pageContent.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3);`"
@@ -33,10 +33,12 @@
       <article
         class="
           w-full
-          py-10
+          py-4
+          lg:py-10
+          px-5
           md:w-3/4
           mx-auto
-          prose prose-sm
+          prose prose-md
           lg:prose-2xl
           font-open-sans
         "
@@ -72,7 +74,4 @@ export default {
 }
 </script>
 
-<style lang="sass">
-h3
-  @apply font-lora
-</style>
+<style lang="sass"></style>
