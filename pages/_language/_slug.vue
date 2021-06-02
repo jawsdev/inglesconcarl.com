@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if="content">
     <!-- <pre>{{ pageContent }}</pre> -->
     <section
-      :style="`background-image: url(${pageContent.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3);`"
+      :style="`background-image: url(${content.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3);`"
       class="
         w-full
         h-40
@@ -25,14 +25,14 @@
             font-medium font-lora
             box-content
           "
-          >{{ pageContent.heroTitle }}</span
+          >{{ content.heroTitle }}</span
         >
       </div>
     </section>
     <section>
       <article
         class="w-full py-10 md:w-3/4 mx-auto prose prose-2xl"
-        v-html="pageContent.main.html"
+        v-html="content.main.html"
       ></article>
     </section>
   </div>
@@ -50,15 +50,11 @@ export default {
     ...mapGetters({
       currentLanguage: 'getLanguage',
       pagesEn: 'getPagesEn',
-      pagesEs: 'getPagesEs'
-      // pageContent: 'getPageContent'
+      pagesEs: 'getPagesEs',
+      pageContent: 'getPageContent'
     }),
-    pageContent() {
-      if (this.currentLanguage === 'es') {
-        return this.pagesEs.find((page) => page.slug === this.currentRoute)
-      } else {
-        return this.pagesEn.find((page) => page.slug === this.currentRoute)
-      }
+    content() {
+      return this.pageContent(this.currentRoute, this.currentLanguage)
     }
   }
 }

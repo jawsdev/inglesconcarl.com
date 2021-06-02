@@ -21,7 +21,7 @@
         >
           <NuxtLink
             class="text-white flex flex-row justify-center items-center"
-            :to="`/${changeLanugage}`"
+            :to="`/${changeLanugage}/`"
             ><span class="hidden lg:block text-sm font-semibold">
               {{ prettyLanguage }}
             </span>
@@ -132,6 +132,7 @@
       <Nuxt />
     </main>
     <footer class="w-full h-48 bg-primary">footer</footer>
+    <CookieControl />
   </div>
 </template>
 
@@ -156,15 +157,10 @@ export default {
         : this.pagesEn.filter((pages) => pages.displayInMenu === true)
     },
     changeLanugage() {
-      return this.currentLanguage === 'es' ? `en/` : `es/`
+      return this.currentLanguage === 'es' ? 'en' : 'es'
     },
     prettyLanguage() {
       return this.currentLanguage === 'es' ? 'Español' : 'English'
-    },
-    changeLanugageRoute() {
-      return this.currentLanguage === 'es'
-        ? this.pagesEn.find((page) => page.slug === 'home')
-        : this.pagesEs.find((page) => page.slug === 'inicio')
     },
     contactText() {
       return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'

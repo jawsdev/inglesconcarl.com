@@ -8,9 +8,15 @@ export const getters = {
   getLanguage: (state) => state.language,
   getPagesEn: (state) => state.pagesEn,
   getPagesEs: (state) => state.pagesEs,
-  getPageContent: (state) => (slug) => {
-    return state.pagesEs.find((page) => page.slug === slug)
+  // getPageContent: (state) => (slug) => {
+  //   return state.pagesEs.find((page) => page.slug === slug)
+  // },
+  getPageContent: (state) => (slug, language) => {
+    return language === 'es'
+      ? state.pagesEs.find((page) => page.slug === slug)
+      : state.pagesEn.find((page) => page.slug === slug)
   }
+
   // usersForMember: (state) => (member) => {
   //   return state.users.data.filter(u => u.member_id === member.id)
   // }
