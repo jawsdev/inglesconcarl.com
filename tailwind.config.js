@@ -45,6 +45,12 @@ module.exports = {
               '&:hover': {
                 color: '#FE8242'
               }
+            },
+            blockquote: {
+              color: '#FE8242',
+              '&:hover': {
+                color: '#FE8242'
+              }
             }
           }
         }
