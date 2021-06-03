@@ -3,16 +3,28 @@
     class="w-full h-screen bg-white flex flex-col justify-between items-center"
   >
     <header
-      class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
+      class="
+        w-full
+        h-16
+        lg:h-36
+        bg-primary
+        flex
+        justify-around
+        items-center
+        top-0
+        z-30
+        fixed
+        lg:static
+      "
     >
       <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
         <img
           v-if="currentLanguage === 'es'"
-          class="h-8 lg:h-16"
+          class="h-10 lg:h-16"
           src="~@/assets/logo_es.svg"
           alt
         />
-        <img v-else class="h-8 lg:h-16" src="~@/assets/logo_en.svg" alt />
+        <img v-else class="h-10 lg:h-16" src="~@/assets/logo_en.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
         <div
@@ -112,11 +124,182 @@
         </nav>
       </div>
     </header>
-    <main class="w-full flex flex-grow flex-col justify-start">
+    <main class="w-full flex flex-grow flex-col justify-start mt-16 lg:mt-0">
       <Nuxt />
     </main>
-    <footer class="w-full h-48 bg-primary">footer</footer>
+    <footer class="w-full border-t bg-white lg:bg-primary pb-1 mt-10">
+      <div
+        class="
+          hidden
+          w-full
+          h-16
+          container
+          mx-auto
+          lg:flex
+          flex-row
+          justify-center
+          items-center
+          py-3
+          lg:p-0
+          text-primary
+          lg:text-white
+          mb-16
+          lg:mb-0
+        "
+      >
+        <NuxtLink :to="`/${currentLanguage}/privacy-policy`"
+          ><span v-if="currentLanguage === 'es'">Privacy Policy</span>
+          <span v-else>Privacy Policy</span>
+        </NuxtLink>
+        <div class="pl-2">&copy; {{ new Date().getFullYear() }} Carl Luke</div>
+      </div>
+    </footer>
+    <div
+      class="
+        fixed
+        bottom-0
+        w-full
+        h-16
+        bg-primary
+        lg:hidden
+        flex flex-row
+        justify-center
+        z-30
+      "
+    >
+      <div class="w-auto flex flex-row justify-center items-center text-white">
+        <button
+          class="
+            focus:outline-none
+            h-full
+            w-full
+            flex flex-col
+            justify-center
+            items-center
+          "
+          @click="mobileNavMenu = !mobileNavMenu"
+        >
+          <font-awesome-icon
+            v-if="!mobileNavMenu"
+            :key="new Date().getTime()"
+            class="mx-2"
+            :icon="['fas', 'bars']"
+            size="3x"
+          />
+
+          <font-awesome-icon
+            v-if="mobileNavMenu"
+            :key="new Date().getTime()"
+            class="mx-2"
+            :icon="['fas', 'times']"
+            size="3x"
+          />
+        </button>
+      </div>
+    </div>
     <CookieControl />
+    <transition name="fade" mode="out-in">
+      <div
+        v-if="mobileNavMenu"
+        class="
+          h-full
+          w-screen
+          bg-primary-dark bg-opacity-75
+          fixed
+          bottom-0
+          left-0
+          pb-16
+        "
+      >
+        <div
+          id="mobilenav"
+          class="h-full w-full flex flex-col justify-end items-center"
+        >
+          <ul class="flex flex-col w-full my-4">
+            <li
+              class="
+                mx-auto
+                my-4
+                w-5/6
+                px-3
+                text-primary
+                bg-white
+                py-4
+                text-2xl text-center
+              "
+            >
+              <NuxtLink
+                :to="`/${currentLanguage}/`"
+                @click.native="hideNavMenu()"
+              >
+                <span v-if="currentLanguage == 'es'">Incinio</span>
+                <span v-else-if="currentLanguage == 'en'">Home</span>
+              </NuxtLink>
+            </li>
+            <li
+              v-for="page in pagesLang"
+              :key="page.id"
+              class="
+                mx-auto
+                my-4
+                w-5/6
+                px-3
+                text-primary
+                bg-white
+                py-4
+                text-2xl text-center
+              "
+            >
+              <NuxtLink
+                :to="`/${currentLanguage}/${page.slug}`"
+                @click.native="hideNavMenu()"
+              >
+                {{ page.title }}
+              </NuxtLink>
+            </li>
+            <li
+              class="
+                mx-auto
+                my-4
+                w-5/6
+                px-3
+                text-primary
+                bg-white
+                py-4
+                text-2xl text-center
+              "
+            >
+              <NuxtLink
+                :to="`/${currentLanguage}/contact`"
+                @click.native="hideNavMenu()"
+              >
+                {{ contactText }}
+              </NuxtLink>
+            </li>
+          </ul>
+          <div
+            class="
+              w-full
+              container
+              mx-auto
+              flex flex-row
+              justify-center
+              items-center
+              pb-3
+              text-white
+            "
+          >
+            <NuxtLink :to="`/${currentLanguage}/privacy-policy`"
+              ><span v-if="currentLanguage === 'es'">Privacy Policy</span>
+              <span v-else>Privacy Policy</span>
+            </NuxtLink>
+            <div class="pl-2">
+              &copy; {{ new Date().getFullYear() }} Carl Luke
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -125,6 +308,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      mobileNavMenu: false,
       currentRoute: this.$route.params.slug,
       dev: process.env.NODE_ENV !== 'production'
     }
@@ -150,7 +334,11 @@ export default {
       return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
     }
   },
-  methods: {}
+  methods: {
+    hideNavMenu() {
+      this.mobileNavMenu = false
+    }
+  }
 }
 </script>
 

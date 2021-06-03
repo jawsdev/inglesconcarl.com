@@ -2,7 +2,8 @@
   <div v-if="content">
     <!-- <pre>{{ pageContent }}</pre> -->
     <section
-      :style="`background-image: url(${content.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3);`"
+      v-if="content"
+      :style="`background-image: url(${content.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.5);`"
       class="
         w-full
         h-40
@@ -15,23 +16,37 @@
       "
     >
       <div class="w-full lg:w-3/4 flex flex-row items-center justify-center">
-        <span
+        <p
           class="
-            text-4xl
+            text-xl
+            md:text-3xl
             lg:text-6xl
             w-auto
             text-white
             subpixel-antialiased
-            font-medium font-lora
-            box-content
+            font-medium
+            hero-title
+            text-center
           "
-          >{{ content.heroTitle }}</span
         >
+          {{ content.heroTitle }}
+        </p>
       </div>
     </section>
     <section>
       <article
-        class="w-full py-10 md:w-3/4 mx-auto prose prose-2xl"
+        class="
+          w-full
+          content-start
+          py-4
+          lg:py-10
+          px-5
+          md:w-3/4
+          mx-auto
+          prose prose-md
+          lg:prose-2xl
+          font-open-sans
+        "
         v-html="content.main.html"
       ></article>
     </section>
