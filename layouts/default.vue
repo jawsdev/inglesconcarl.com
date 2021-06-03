@@ -6,7 +6,13 @@
       class="w-full h-20 lg:h-36 bg-primary flex justify-around items-center"
     >
       <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
-        <img class="h-8 lg:h-16" src="~@/assets/logo.svg" alt />
+        <img
+          v-if="currentLanguage === 'es'"
+          class="h-8 lg:h-16"
+          src="~@/assets/logo_es.svg"
+          alt
+        />
+        <img v-else class="h-8 lg:h-16" src="~@/assets/logo_en.svg" alt />
       </NuxtLink>
       <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
         <div
@@ -81,28 +87,6 @@
                     </div>
                   </div>
                 </div>
-              </li>
-              <li
-                v-if="dev"
-                class="hoverable hover:bg-gray-100 hover:text-primary"
-              >
-                <NuxtLink
-                  class="
-                    relative
-                    block
-                    py-2
-                    px-4
-                    lg:p-6
-                    text-xs
-                    lg:text-base
-                    font-bold
-                    hover:bg-gray-100
-                    hover:text-primary
-                  "
-                  :to="`/${currentLanguage}/`"
-                >
-                  Dev link
-                </NuxtLink>
               </li>
               <li class="hoverable hover:bg-gray-100 hover:text-primary">
                 <NuxtLink
