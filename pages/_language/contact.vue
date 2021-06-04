@@ -1,5 +1,35 @@
 <template>
   <div>
+    <section
+      class="
+        w-full
+        h-40
+        lg:h-64
+        hero-image
+        bg-cover
+        flex
+        justify-center
+        items-center
+        bg-center
+      "
+    >
+      <div class="w-full lg:w-3/4 flex flex-row items-center justify-center">
+        <p
+          class="
+            text-2xl
+            md:text-6xl
+            lg:text-6xl
+            w-auto
+            text-white
+            subpixel-antialiased
+            font-medium
+            hero-title
+          "
+        >
+          {{ contactText }}
+        </p>
+      </div>
+    </section>
     <client-only>
       <section class="w-11/12 lg:w-1/2 my-6 mx-auto flex flex-row flex-wrap">
         <div class="w-1/4 text-center">
@@ -335,6 +365,11 @@ export default {
       sendDisabled: false,
       showForm: false,
       incompleteCaptcha: false
+    }
+  },
+  computed: {
+    contactText() {
+      return this.currentLanguage === 'es' ? 'Conacto' : 'Contact'
     }
   },
   methods: {

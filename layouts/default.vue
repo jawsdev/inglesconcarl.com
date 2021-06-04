@@ -1,153 +1,142 @@
 <template>
   <div
-    class="w-full h-screen bg-white flex flex-col justify-between items-center"
+    class="
+      w-full
+      min-h-screen
+      bg-white
+      flex flex-col
+      justify-between
+      items-center
+    "
   >
-    <header
-      class="
-        w-full
-        h-16
-        lg:h-36
-        bg-primary
-        flex
-        justify-around
-        items-center
-        top-0
-        z-30
-        fixed
-        lg:static
-      "
-    >
-      <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
-        <img
-          v-if="currentLanguage === 'es'"
-          class="h-10 lg:h-16"
-          src="~@/assets/logo_es.svg"
-          alt
-        />
-        <img v-else class="h-10 lg:h-16" src="~@/assets/logo_en.svg" alt />
-      </NuxtLink>
-      <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
-        <div
-          class="
-            flex flex-row
-            h-full
-            justify-end
-            lg:relative
-            items-center
-            lg:items-start
-          "
-        >
-          <NuxtLink
-            class="text-white flex flex-row justify-center items-center"
-            :to="`/${changeLanugage}/`"
-            ><span class="hidden lg:block text-sm font-semibold">
-              {{ prettyLanguage }}
-            </span>
-            <font-awesome-icon
-              class="pl-2 pr-2 lg:pr-0"
-              :icon="['fas', 'language']"
-              size="3x"
-            />
-          </NuxtLink>
-        </div>
-        <nav class="w-full bg-primary text-white hidden lg:block">
-          <div class="container mx-auto flex justify-end">
-            <ul class="flex">
-              <li
-                v-for="page in pagesLang"
-                :key="page.id"
-                class="hoverable hover:bg-gray-100 hover:text-primary"
+    <header class="w-full h-20 lg:h-32 flex bg-primary top-0 z-30">
+      <div class="w-full h-full flex flex-row justify-around items-center">
+        <NuxtLink :to="`/${currentLanguage.toLowerCase()}/`">
+          <img
+            v-if="currentLanguage === 'es'"
+            class="h-10 lg:h-16 hover:opacity-75"
+            src="~@/assets/logo_es.svg"
+            alt="Inglés con Carl Logo"
+          />
+          <img
+            v-else
+            class="h-10 lg:h-16 hover:opacity-75"
+            src="~@/assets/logo_en.svg"
+            alt="English with Carl Logo"
+          />
+        </NuxtLink>
+        <div class="flex lg:h-full w-2/5 lg:w-3/4 flex-col justify-between">
+          <div class="flex justify-end items-center">
+            <NuxtLink
+              class="text-white flex flex-row justify-center items-center"
+              :to="`/${changeLanugage}/`"
+              ><span
+                title="Selected language"
+                class="text-sm font-semibold font-lora pt-2 pb-1 lg:pr-0"
               >
-                <NuxtLink
-                  class="
-                    relative
-                    block
-                    py-2
-                    px-4
-                    lg:p-6
-                    text-xs
-                    lg:text-base
-                    font-bold
-                    hover:bg-gray-100
-                    hover:text-primary
-                  "
-                  :to="`/${currentLanguage}/${page.slug}`"
+                {{ prettyLanguage }}
+              </span>
+            </NuxtLink>
+          </div>
+          <nav class="w-full bg-primary text-white hidden lg:block">
+            <div class="container mx-auto flex justify-end">
+              <ul class="flex items-end">
+                <li
+                  v-for="page in pagesLang"
+                  :key="page.id"
+                  class="hoverable hover:bg-gray-100 hover:text-primary"
                 >
-                  {{ page.title }}
-                </NuxtLink>
-                <div
-                  v-if="page.enableHeroTitleHover"
-                  class="p-6 mega-menu h-64 mb-16 sm:mb-0 bg-gray-100 z-50"
-                >
-                  <div
+                  <NuxtLink
                     class="
-                      mx-auto
-                      w-full
-                      h-full
-                      flex flex-wrap
-                      justify-center
-                      items-center
+                      relative
+                      block
+                      py-3
+                      px-4
+                      text-xs
+                      lg:text-base
+                      font-bold
+                      hover:bg-gray-100
+                      hover:text-primary
                     "
+                    :to="`/${currentLanguage}/${page.slug}`"
                   >
-                    <div class="w-auto text-primary text-center">
-                      <h2 class="font-bold text-4xl">
-                        {{ page.heroTitle }}
-                      </h2>
-                      <p v-if="page.heroSubtitle" class="text-gray-600 text-xl">
-                        {{ page.heroSubtitle }}
-                      </p>
+                    {{ page.title }}
+                  </NuxtLink>
+                  <div
+                    v-if="page.enableHeroTitleHover"
+                    class="p-6 mega-menu h-64 mb-16 sm:mb-0 bg-gray-100 z-50"
+                  >
+                    <div
+                      class="
+                        mx-auto
+                        w-full
+                        h-full
+                        flex flex-wrap
+                        justify-center
+                        items-center
+                      "
+                    >
+                      <div class="w-auto text-primary text-center">
+                        <h2 class="font-bold text-4xl">
+                          {{ page.heroTitle }}
+                        </h2>
+                        <p
+                          v-if="page.heroSubtitle"
+                          class="text-gray-600 text-xl"
+                        >
+                          {{ page.heroSubtitle }}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="hoverable hover:bg-gray-100 hover:text-primary">
-                <NuxtLink
-                  class="
-                    relative
-                    block
-                    py-2
-                    px-4
-                    lg:p-6
-                    text-xs
-                    lg:text-base
-                    font-bold
-                    hover:bg-gray-100
-                    hover:text-primary
-                  "
-                  :to="`/${currentLanguage}/contact`"
-                >
-                  {{ contactText }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
-        </nav>
+                </li>
+                <li class="hoverable hover:bg-gray-100 hover:text-primary">
+                  <NuxtLink
+                    class="
+                      relative
+                      block
+                      py-3
+                      px-4
+                      text-xs
+                      lg:text-base
+                      font-bold
+                      hover:bg-gray-100
+                      hover:text-primary
+                    "
+                    :to="`/${currentLanguage}/contact`"
+                  >
+                    {{ contactText }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
-    <main class="w-full flex flex-grow flex-col justify-start mt-16 lg:mt-0">
+    <main class="w-full flex flex-grow flex-col justify-start">
       <Nuxt />
     </main>
-    <footer class="w-full border-t bg-white lg:bg-primary pb-1 mt-10">
+    <footer class="w-full bg-white lg:bg-primary pb-1 mt-10">
       <div
         class="
-          hidden
           w-full
           h-16
-          container
-          mx-auto
-          lg:flex
-          flex-row
+          px-3
+          flex flex-row
           justify-center
           items-center
-          py-3
-          lg:p-0
+          pt-3
+          pb-1
           text-primary
           lg:text-white
           mb-16
           lg:mb-0
         "
       >
-        <NuxtLink :to="`/${currentLanguage}/privacy-policy`"
+        <NuxtLink
+          class="text-gray-400 lg:text-white"
+          :to="`/${currentLanguage}/privacy-policy`"
           ><span v-if="currentLanguage === 'es'">Privacy Policy</span>
           <span v-else>Privacy Policy</span>
         </NuxtLink>
@@ -176,24 +165,34 @@
             flex flex-col
             justify-center
             items-center
+            uppercase
+            font-lora
+            text-xl
           "
           @click="mobileNavMenu = !mobileNavMenu"
         >
-          <font-awesome-icon
+          <div
             v-if="!mobileNavMenu"
             :key="new Date().getTime()"
-            class="mx-2"
-            :icon="['fas', 'bars']"
-            size="3x"
-          />
-
-          <font-awesome-icon
+            class="px-6 h-full flex items-center bg-primary-light"
+          >
+            {{ menuText }}
+          </div>
+          <div
             v-if="mobileNavMenu"
             :key="new Date().getTime()"
-            class="mx-2"
-            :icon="['fas', 'times']"
-            size="3x"
-          />
+            class="
+              px-6
+              h-full
+              flex
+              items-center
+              shadow-inner
+              border border-primary-light
+              bg-primary-dark
+            "
+          >
+            {{ menuCloseText }}
+          </div>
         </button>
       </div>
     </div>
@@ -219,12 +218,10 @@
             <li
               class="
                 mx-auto
-                my-4
+                my-2
                 w-5/6
-                px-3
                 text-primary
                 bg-white
-                py-4
                 text-2xl text-center
               "
             >
@@ -232,8 +229,7 @@
                 :to="`/${currentLanguage}/`"
                 @click.native="hideNavMenu()"
               >
-                <span v-if="currentLanguage == 'es'">Incinio</span>
-                <span v-else-if="currentLanguage == 'en'">Home</span>
+                <div class="w-full h-full px-3 py-4">{{ homeText }}</div>
               </NuxtLink>
             </li>
             <li
@@ -241,12 +237,10 @@
               :key="page.id"
               class="
                 mx-auto
-                my-4
+                my-2
                 w-5/6
-                px-3
                 text-primary
                 bg-white
-                py-4
                 text-2xl text-center
               "
             >
@@ -254,18 +248,16 @@
                 :to="`/${currentLanguage}/${page.slug}`"
                 @click.native="hideNavMenu()"
               >
-                {{ page.title }}
+                <div class="w-full h-full px-3 py-4">{{ page.title }}</div>
               </NuxtLink>
             </li>
             <li
               class="
                 mx-auto
-                my-4
+                my-2
                 w-5/6
-                px-3
                 text-primary
                 bg-white
-                py-4
                 text-2xl text-center
               "
             >
@@ -273,30 +265,10 @@
                 :to="`/${currentLanguage}/contact`"
                 @click.native="hideNavMenu()"
               >
-                {{ contactText }}
+                <div class="w-full h-full px-3 py-4">{{ contactText }}</div>
               </NuxtLink>
             </li>
           </ul>
-          <div
-            class="
-              w-full
-              container
-              mx-auto
-              flex flex-row
-              justify-center
-              items-center
-              pb-3
-              text-white
-            "
-          >
-            <NuxtLink :to="`/${currentLanguage}/privacy-policy`"
-              ><span v-if="currentLanguage === 'es'">Privacy Policy</span>
-              <span v-else>Privacy Policy</span>
-            </NuxtLink>
-            <div class="pl-2">
-              &copy; {{ new Date().getFullYear() }} Carl Luke
-            </div>
-          </div>
         </div>
       </div>
     </transition>
@@ -329,6 +301,15 @@ export default {
     },
     prettyLanguage() {
       return this.currentLanguage === 'es' ? 'Español' : 'English'
+    },
+    homeText() {
+      return this.currentLanguage === 'es' ? 'Inicio' : 'Home'
+    },
+    menuText() {
+      return this.currentLanguage === 'es' ? 'Menú' : 'Menu'
+    },
+    menuCloseText() {
+      return this.currentLanguage === 'es' ? 'Cerca' : 'Close'
     },
     contactText() {
       return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
@@ -389,4 +370,7 @@ h1, h2, h3, h4, h5
 .fade-enter,
 .fade-leave-active
   opacity: 0
+nav .nuxt-link-exact-active
+  @apply bg-white
+  @apply text-primary
 </style>

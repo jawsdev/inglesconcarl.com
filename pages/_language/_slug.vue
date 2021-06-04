@@ -18,7 +18,7 @@
       <div class="w-full lg:w-3/4 flex flex-row items-center justify-center">
         <p
           class="
-            text-xl
+            text-2xl
             md:text-3xl
             lg:text-6xl
             w-auto
@@ -27,6 +27,7 @@
             font-medium
             hero-title
             text-center
+            font-lora
           "
         >
           {{ content.heroTitle }}
