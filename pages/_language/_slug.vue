@@ -1,6 +1,5 @@
 <template>
   <div v-if="content">
-    <!-- <pre>{{ pageContent }}</pre> -->
     <section
       v-if="content"
       :style="`background-image: url(${content.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.5);`"
@@ -15,6 +14,12 @@
         bg-center
       "
     >
+      <SocialHead
+        v-if="content.seaDescription && content.seoImage"
+        :title="content.title"
+        :description="content.seoDescription"
+        :image="content.seoImage.url"
+      />
       <div class="w-full lg:w-3/4 flex flex-row items-center justify-center">
         <p
           class="
@@ -28,6 +33,7 @@
             hero-title
             text-center
             font-lora
+            px-3
           "
         >
           {{ content.heroTitle }}
@@ -62,15 +68,21 @@ export default {
       currentRoute: this.$route.params.slug
     }
   },
+  head() {
+    return {}
+  },
   computed: {
     ...mapGetters({
       currentLanguage: 'getLanguage',
-      pagesEn: 'getPagesEn',
-      pagesEs: 'getPagesEs',
       pageContent: 'getPageContent'
     }),
     content() {
       return this.pageContent(this.currentRoute, this.currentLanguage)
+    },
+    getTitle() {
+      return this.currentLanguage === 'es' && this.content.title
+        ? `Inglés con Carl - ${this.content.title}`
+        : `English with Carl - ${this.content.title}`
     }
   }
 }

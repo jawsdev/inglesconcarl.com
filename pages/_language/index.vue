@@ -14,6 +14,12 @@
         bg-center
       "
     >
+      <SocialHead
+        v-if="content.seaDescription && content.seoImage"
+        :title="content.title"
+        :description="content.seoDescription"
+        :image="content.seoImage.url"
+      />
       <div class="w-full lg:w-3/4 flex flex-row items-center justify-center">
         <span
           class="
@@ -56,11 +62,12 @@ export default {
       currentRoute: this.$route.params.slug
     }
   },
+  head() {
+    return {}
+  },
   computed: {
     ...mapGetters({
       currentLanguage: 'getLanguage',
-      pagesEs: 'getPagesEs',
-      pagesEn: 'getPagesEn',
       pageContent: 'getPageContent'
     }),
     content() {
@@ -68,14 +75,12 @@ export default {
     },
     homeSlug() {
       return this.currentLanguage === 'es' ? 'inicio' : 'home'
+    },
+    getTitle() {
+      return this.currentLanguage === 'es' && this.content.length > 0
+        ? `Inglés con Carl - ${this.content.title}`
+        : `English with Carl - ${this.content.title}`
     }
-    // pageContent() {
-    //   if (this.currentLanguage === 'es') {
-    //     return this.pagesEs.find((page) => page.slug === 'inicio')
-    //   } else {
-    //     return this.pagesEn.find((page) => page.slug === 'home')
-    //   }
-    // }
   }
 }
 </script>
