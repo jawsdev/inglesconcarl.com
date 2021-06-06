@@ -78,6 +78,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/recaptcha',
     [
       'nuxt-cookie-control',
       {
@@ -85,9 +86,7 @@ export default {
         controlButton: false
       }
     ]
-    // '@nuxtjs/recaptcha'
   ],
-
   router: {
     middleware: ['language', 'pages_english', 'pages_spanish']
   },
@@ -97,6 +96,12 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  recaptcha: {
+    hideBadge: false,
+    siteKey: '6LfodhUTAAAAAFOYOefb_vqQU7AJRm2wy6KMMQKz', // Better would be from 'process.env.API_KEY' and with '.env' file
+    version: 2 // Or 3
+  },
 
   generate: {
     routes: ['/en/', '/es/']

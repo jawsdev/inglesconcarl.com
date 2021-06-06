@@ -5,7 +5,7 @@
         w-full
         h-40
         lg:h-64
-        hero-image
+        contact-hero-image
         bg-cover
         flex
         justify-center
@@ -22,8 +22,7 @@
             w-auto
             text-white
             subpixel-antialiased
-            font-medium
-            hero-title
+            font-medium font-lora
           "
         >
           {{ contactText }}
@@ -189,7 +188,7 @@
             text-gray-700
             contact-form
           "
-          @submit.prevent="sendEmail"
+          @submit.prevent="onSubmit"
         >
           <!-- name field -->
           <div class="flex flex-wrap mb-6">
@@ -323,7 +322,9 @@
               >
             </div>
           </div>
-          <div class="my-6 captcha"></div>
+          <div class="my-6 captcha">
+            <recaptcha />
+          </div>
           <button
             class="
               w-full
@@ -369,7 +370,7 @@ export default {
   },
   computed: {
     contactText() {
-      return this.currentLanguage === 'es' ? 'Conacto' : 'Contact'
+      return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
     }
   },
   methods: {
@@ -379,7 +380,22 @@ export default {
     hideEmailSent() {
       this.$modal.hide('email-confirmation-modal')
     },
-    sendEmail(e) {
+    async onSubmit(e) {
+      try {
+        const token = await this.$recaptcha.getResponse()
+        // console.log('ReCaptcha token:', token)
+
+        // send token to server alongside your form dat
+        this.sendEmail(e, token)
+        // at the end you need to reset recaptcha
+        await this.$recaptcha.reset()
+      } catch (error) {
+        // console.log('Captcha incomplete', error)
+        this.incompleteCaptcha = true
+      }
+    },
+    sendEmail(e, token) {
+      // console.log('e', e.target)
       this.loading = true
       this.sendDisabled = true
       emailjs
@@ -390,28 +406,28 @@ export default {
           'user_2NjKS1ME9pstAgGdGjtQ2'
         )
         .then((response) => {
-          //   console.log('response: ', response)
+          // console.log('response: ', response)
           if (response.status === 200) {
-            // this.showEmailSent();
-            // console.log("Email sent!");
+            // console.log('Email sent!')
             this.emailSent = true
             this.emailError = false
             this.showForm = false
             this.incompleteCaptcha = false
+            this.loading = false
+            this.sendDisabled = false
           }
         })
         .catch((error) => {
-          //   console.log('error: ', error)
-          if (error.text === 'The g-recaptcha-response parameter not found') {
-            this.incompleteCaptcha = true
-          } else {
-            this.emailError = true
-          }
+          console.log('error: ', error)
+          this.emailError = true
         })
-        .finally(() => (this.loading = false)((this.sendDisabled = false)))
     }
   }
 }
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+.contact-hero-image
+  background-image: url("~@/assets/contact.jpg")
+  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3)
+</style>

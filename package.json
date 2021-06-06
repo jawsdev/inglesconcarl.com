@@ -20,7 +20,6 @@
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "nuxt": "^2.15.3",
-    "nuxt-cookie-consent": "^0.3.0",
     "nuxt-cookie-control": "^1.9.7"
   },
   "devDependencies": {

@@ -12,6 +12,7 @@ export default async function ({ store, app }) {
           title
           main {
             html
+            raw
           }
           heroImage(locales: en) {
             url
@@ -19,6 +20,14 @@ export default async function ({ store, app }) {
           }
           enableHeroTitleHover
           displayInMenu
+          pageImage {
+            url
+            width
+          }
+          seoDescription
+          seoImage {
+            url
+          }
         }
       }
     `
