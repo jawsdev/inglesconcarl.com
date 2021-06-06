@@ -117,7 +117,7 @@
     <main class="w-full flex flex-grow flex-col justify-start">
       <Nuxt />
     </main>
-    <footer class="w-full bg-white lg:bg-primary pb-1 mt-10">
+    <footer class="w-full bg-white lg:bg-primary pb-1">
       <div
         class="
           w-full
