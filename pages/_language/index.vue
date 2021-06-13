@@ -1,5 +1,5 @@
 <template>
-  <div v-if="content">
+  <div v-if="content" class="flex flex-col flex-grow">
     <section
       v-if="content"
       :style="`background-image: url(${content.heroImage.url});  box-shadow: inset 0 0 0 1000px rgba(254, 130, 66, 0.3);`"
@@ -35,7 +35,7 @@
         >
       </div>
     </section>
-    <section>
+    <section class="flex flex-grow items-center">
       <article
         class="
           w-full
@@ -44,7 +44,7 @@
           px-5
           md:w-3/4
           mx-auto
-          prose prose-md
+          prose prose-lg
           lg:prose-2xl
           font-open-sans
         "
