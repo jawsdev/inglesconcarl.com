@@ -55,8 +55,7 @@
                       text-xs
                       lg:text-base
                       font-bold
-                      hover:bg-gray-100
-                      hover:text-primary
+                      hover:bg-gray-100 hover:text-primary
                     "
                     :to="`/${currentLanguage}/${page.slug}`"
                   >
@@ -100,8 +99,7 @@
                       text-xs
                       lg:text-base
                       font-bold
-                      hover:bg-gray-100
-                      hover:text-primary
+                      hover:bg-gray-100 hover:text-primary
                     "
                     :to="`/${currentLanguage}/contact`"
                   >
@@ -134,12 +132,13 @@
           lg:mb-0
         "
       >
-        <NuxtLink
-          class="text-gray-400 lg:text-white"
-          :to="`/${currentLanguage}/privacy-policy`"
-          ><span v-if="currentLanguage === 'es'">Privacy Policy</span>
-          <span v-else>Privacy Policy</span>
-        </NuxtLink>
+        <a
+          href="https://www.iubenda.com/privacy-policy/59630051"
+          class="iubenda-white iubenda-noiframe iubenda-embed iubenda-noiframe"
+          title="Privacy Policy"
+          target="_blank"
+          >Privacy Policy</a
+        >
         <div class="pl-2">&copy; {{ new Date().getFullYear() }} Carl Luke</div>
       </div>
     </footer>
