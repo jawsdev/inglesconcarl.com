@@ -70,7 +70,7 @@
               >You can send an email directly:</span
             >
           </p>
-          <a class="text-primary">
+          <a href="mailto: info@inglesconcarl.com" class="text-primary">
             <img class="h-6 pt-1" src="@/assets/email.svg" alt />
           </a>
         </div>
@@ -157,6 +157,7 @@
         </div>
       </section>
       <section
+        v-if="showForm"
         class="
           w-11/12
           lg:w-3/4
@@ -364,7 +365,7 @@ export default {
       emailError: false,
       loading: false,
       sendDisabled: false,
-      showForm: false,
+      showForm: true,
       incompleteCaptcha: false
     }
   },
@@ -373,6 +374,11 @@ export default {
       return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
     }
   },
+  // mounted() {
+  //   const privacyPolicy = document.createElement('script')
+  //   privacyPolicy.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
+  //   document.head.appendChild(privacyPolicy)
+  // },
   methods: {
     showEmailSent() {
       this.$modal.show('email-confirmation-modal')
