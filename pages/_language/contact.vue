@@ -207,9 +207,7 @@
                   bg-gray-200
                   border border-gray-200
                   rounded
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
+                  focus:outline-none focus:bg-white focus:border-gray-500
                 "
                 name="user_name"
                 type="text"
@@ -251,9 +249,7 @@
                   bg-gray-200
                   border border-gray-200
                   rounded
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
+                  focus:outline-none focus:bg-white focus:border-gray-500
                 "
                 name="user_email"
                 type="email"
@@ -296,9 +292,7 @@
                   bg-gray-200
                   border border-gray-200
                   rounded
-                  focus:outline-none
-                  focus:bg-white
-                  focus:border-gray-500
+                  focus:outline-none focus:bg-white focus:border-gray-500
                 "
                 name="message"
                 type="text"
@@ -332,8 +326,7 @@
               shadow
               bg-primary
               hover:bg-orange-500
-              focus:shadow-outline
-              focus:outline-none
+              focus:shadow-outline focus:outline-none
               text-white
               font-bold
               py-2
@@ -356,7 +349,7 @@
 </template>
 
 <script>
-import emailjs from 'emailjs-com'
+import emailjs from 'emailjs-com';
 export default {
   data() {
     return {
@@ -367,43 +360,38 @@ export default {
       sendDisabled: false,
       showForm: true,
       incompleteCaptcha: false
-    }
+    };
   },
   computed: {
     contactText() {
-      return this.currentLanguage === 'es' ? 'Contacto' : 'Contact'
+      return this.currentLanguage === 'es' ? 'Contacto' : 'Contact';
     }
   },
-  // mounted() {
-  //   const privacyPolicy = document.createElement('script')
-  //   privacyPolicy.setAttribute('src', 'https://www.google.com/recaptcha/api.js')
-  //   document.head.appendChild(privacyPolicy)
-  // },
   methods: {
     showEmailSent() {
-      this.$modal.show('email-confirmation-modal')
+      this.$modal.show('email-confirmation-modal');
     },
     hideEmailSent() {
-      this.$modal.hide('email-confirmation-modal')
+      this.$modal.hide('email-confirmation-modal');
     },
     async onSubmit(e) {
       try {
-        const token = await this.$recaptcha.getResponse()
+        const token = await this.$recaptcha.getResponse();
         // console.log('ReCaptcha token:', token)
 
         // send token to server alongside your form dat
-        this.sendEmail(e, token)
+        this.sendEmail(e, token);
         // at the end you need to reset recaptcha
-        await this.$recaptcha.reset()
+        await this.$recaptcha.reset();
       } catch (error) {
         // console.log('Captcha incomplete', error)
-        this.incompleteCaptcha = true
+        this.incompleteCaptcha = true;
       }
     },
     sendEmail(e, token) {
       // console.log('e', e.target)
-      this.loading = true
-      this.sendDisabled = true
+      this.loading = true;
+      this.sendDisabled = true;
       emailjs
         .sendForm(
           'smtp_server',
@@ -415,21 +403,21 @@ export default {
           // console.log('response: ', response)
           if (response.status === 200) {
             // console.log('Email sent!')
-            this.emailSent = true
-            this.emailError = false
-            this.showForm = false
-            this.incompleteCaptcha = false
-            this.loading = false
-            this.sendDisabled = false
+            this.emailSent = true;
+            this.emailError = false;
+            this.showForm = false;
+            this.incompleteCaptcha = false;
+            this.loading = false;
+            this.sendDisabled = false;
           }
         })
         .catch((error) => {
-          console.log('error: ', error)
-          this.emailError = true
-        })
+          console.log('error: ', error);
+          this.emailError = true;
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>
